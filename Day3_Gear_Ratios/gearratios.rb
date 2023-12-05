@@ -2,9 +2,6 @@ Dir.chdir(File.dirname(__FILE__))
 # input=File.open("puzzleInput.txt").readlines.map(&:chomp)
 input=File.open("teststrings.txt").readlines.map(&:chomp)
 
-# correct: 526404
-# I got 507705
-
 $part1_symbols = ["!","@","#","$","%","&","*","-","=","_","+","<",">","?","/"]
 $part2_symbols = ["*"]
 
@@ -102,7 +99,6 @@ end
 
 p "Part 1: #{all_numbers.sum}"
 
-
 #### Part 2
 
 sym_table.clear
@@ -118,8 +114,6 @@ input.each_with_index do |line,ind|
 
     num_table<<[ind,find_number_col(line)]
 end
-
-p sym_table,num_table
 
 sym_table.each do |s|
     symbols_neighbors=Array.new
