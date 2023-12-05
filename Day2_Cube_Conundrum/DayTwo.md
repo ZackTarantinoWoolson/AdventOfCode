@@ -36,4 +36,7 @@ Tasks:
 - 1: Compile list of highest number of cubes per color, per game
 - 2: Compare highest number of cubes against the max number
 - 3: Record Game IDs and add them together
-- 4:
+
+Part 1 passed at 10:30 PM 12/4
+
+Part 2: 
