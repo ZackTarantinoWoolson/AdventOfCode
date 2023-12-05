@@ -66,9 +66,10 @@ Part 1 passed at 10:30 PM 12/4
 ### Part 2: 
 
 Part 2 Reults needed:
-Which games would have been possible if the bag contained only 12 red cubes, 13 green cubes, and 14 blue cubes? Sum of Game IDs
+Find the minimum need cubs of each color, multiply those numbers together. What is the sum of the power of these sets?
 
 Tasks:
-- 1: Compile list of highest number of cubes per color, per game
-- 2: Compare highest number of cubes against the max number
-- 3: Record Game IDs and add them together
+- 1: Compile list of lowest possible number of cubes per color, per game -- Already have this as the Highest number of cubes is also the lowest possible cubes
+- 2: Record Game IDs and add/multiply them together
+
+Part 2 passed at 10:38 PM 12/4

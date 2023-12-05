@@ -7,10 +7,7 @@ $maxGreen=13
 $maxBlue=14
 
 sum=0
-
-def parse_game(game)
-
-end
+product=0
 
 input.each do |line|
     game_id= line.split(": ")[0].split(" ")[1]
@@ -35,12 +32,15 @@ input.each do |line|
             topBlue = val if topBlue<val
         end        
     end
-    p "TopRed: #{topRed} | Top Green: #{topGreen} | Top Blue: #{topBlue} "
+    # p "TopRed: #{topRed} | Top Green: #{topGreen} | Top Blue: #{topBlue} "
 
     unless((topRed>$maxRed) || (topGreen>$maxGreen) || (topBlue>$maxBlue))
-        p "Possible"
+        # p "Possible"
         sum+=game_id.to_i
     end
+
+    product+=(topRed*topGreen*topBlue)
 end
 
-p sum
+p "Part 1: #{sum}"
+p "Part 2: #{product}"
