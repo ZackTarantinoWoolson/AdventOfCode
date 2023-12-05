@@ -78,7 +78,7 @@ Tasks:
 ## Part 2
 
 Start: 5:43 PM ET 12/5
-Finished 
+Finished  6:20 PM 12/5
 
 Result needed: 
 Total number of scratch cards at the end of the original and copy wins
