@@ -1,6 +1,8 @@
 Dir.chdir(File.dirname(__FILE__))
 input=File.open("puzzleInput.txt").readlines.map(&:chomp)
+# input=File.open("teststrings.txt").readlines.map(&:chomp)
 
+# 55447
 # 54706
 
 $num_strings = ["zero","one","two","three","four","five","six","seven","eight","nine"]
@@ -20,7 +22,8 @@ end
 def find_numbers(line)
     num_index = Array.new # ["num", index]
 
-    $all_nums.each do |num|
+    # Part 1 : Just look for ints
+    $num_nums.each do |num|
         temp = scan_string(line,num)
         temp.each { |t| num_index<< t } unless (temp.empty?)
     end
@@ -46,6 +49,7 @@ input.each do |line|
 
     sub_total = convert_strings(nums_in_line.first).to_s
     sub_total += convert_strings(nums_in_line.last).to_s
+
     final_num += sub_total.to_i
 end
 
