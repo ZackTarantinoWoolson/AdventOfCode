@@ -67,29 +67,22 @@ p "Part 1: #{total_points}"
 total_cards=0
 total_instances=preset_game_ids
 
-$input.each_with_index do |line,ind|  
+$input.each_with_index do |line,ind|
+
+    wins=0
     game_array=Array.new
     game_id= line.split(": ")[0].split(" ")[1]
-    p game_id
 
-    # p total_instances[game_id.to_i]
+    winning_numbers= get_winning_numbers(line)
+
+    get_play_numbers(line).each do |num|
+        if winning_numbers.include?(num)
+            wins+=1
+        end
+    end
 
     (1..total_instances[game_id.to_i]).each do |x|
-        wins=0
-
-        # total_instances[game_id.to_i]=1
-        # p total_instances
-
-        winning_numbers= get_winning_numbers(line)
-
-        get_play_numbers(line).each do |num|
-            if winning_numbers.include?(num)
-                wins+=1
-            end
-        end
-
         calculate_card_instances(wins,ind+1).each do |game|
-            # p "game: #{game}"
             total_instances[game]+=1 unless game>total_instances.keys.last
         end
     end
@@ -98,5 +91,3 @@ end
 total_instances.each {|x| total_cards+=x[1].to_i}
 
 p "Part 2: #{total_cards}"
-
-#7185540
