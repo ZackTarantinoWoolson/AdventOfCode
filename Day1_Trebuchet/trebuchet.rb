@@ -1,14 +1,7 @@
-# test_strings = ["kjrqmzv9mmtxhgvsevenhvq7","four2tszbgmxpbvninebxns6nineqbqzgjpmpqr",
-# "rkzlnmzgnk91zckqprrptnthreefourtwo","fouronevzkbnzm6seven47",
-# "zphgdcznqsm2","4gjnmxtrbflgp71","4sqvv1cnpn"]
-
-test_strings=["1abc2","pqr3stu8vwx","a1b2c3d4e5f","treb7uchet"]
-
-# test_strings = ["seven5trmnqnqgqprkdkxcsrtmzjccgrtbklnhnfive"]
-
-
 Dir.chdir(File.dirname(__FILE__))
-input=File.open("puzzleInput.txt").readlines.map(&:chomp)
+input=File.open("teststrings.txt").readlines.map(&:chomp)
+
+# 54706
 
 $num_strings = ["zero","one","two","three","four","five","six","seven","eight","nine"]
 $nums = ["0","1","2","3","4","5","6","7","8","9"]
@@ -43,13 +36,15 @@ end
 
 final_num = 0
 
-test_strings.each do |line|
-    # p line
+input.each do |line|
     nums_in_line = find_numbers(line)
-    # p "first #{nums_in_line.first} | last: #{nums_in_line.last}"
+    p nums_in_line
+
+    p "#{nums_in_line.first} | #{nums_in_line.last}"
 
     sub_total = convert_strings(nums_in_line.first).to_s
     sub_total += convert_strings(nums_in_line.last).to_s
+    p sub_total
     final_num += sub_total.to_i
 end
 

@@ -27,3 +27,5 @@ Task 1 : Find all numbers per line and in the order they are set
 Task 2 : Convert string ("one") to number ("1")
 Task 3 : Combine the first and last numbers on each line to form one number
 Task 4 : Add All numbers together to get the sum of all values
+
+54706
