@@ -1,6 +1,9 @@
 Dir.chdir(File.dirname(__FILE__))
-# input=File.open("puzzleInput.txt").readlines.map(&:chomp)
-input=File.open("teststrings.txt").readlines.map(&:chomp)
+input=File.open("puzzleInput.txt").readlines.map(&:chomp)
+# input=File.open("teststrings.txt").readlines.map(&:chomp)
+
+# correct: 526404
+# I got 507705
 
 $symbols = ["!","@","#","$","%","&","*","-","=","_","+","<",">","?"]
 
@@ -68,6 +71,7 @@ def find_neighbors(row,col,nums)
         # p "NUmber: #{n[0]} | numbers index: #{n[1]} | Col: #{col}"
         if (([col-1,col,col+1].include?(n[1])) || ([col-1,col,col+1].include?(n[1]+n[0].length.to_i-1)))
             # p "#{n[0]} is in"
+            p n[0]
             line_total+=n[0].to_i
         end
     end
@@ -107,4 +111,5 @@ sym_table.each do |s|
     end
 end
 
+# p all_numbers
 p "Part 1: #{all_numbers.sum}"

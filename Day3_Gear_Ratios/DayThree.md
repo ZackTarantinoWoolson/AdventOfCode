@@ -38,4 +38,6 @@ End result:
 Find all numbers that are adject (Above, below, and diagonal by 1 character) to a a symbol (.*$/+-=&#@%) - add them all together
 
 Tasks:
-- Use a search algorithm to 
+- Find symbols numbers for each row
+- For each symbols, looks at the adjacet spaces and count the numbers
+- Add those numbers to an array and sum it at the end.
