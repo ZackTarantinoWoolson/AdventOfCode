@@ -1,6 +1,6 @@
 Dir.chdir(File.dirname(__FILE__))
-# $input=File.open("puzzle$input.txt").readlines.map(&:chomp)
-$input=File.open("teststrings.txt").readlines.map(&:chomp)
+$input=File.open("puzzleInput.txt").readlines.map(&:chomp)
+# $input=File.open("teststrings.txt").readlines.map(&:chomp)
 
 
 def get_winning_numbers(line)
@@ -64,13 +64,13 @@ end
 p "Part 1: #{total_points}"
 
 ### Part 2:
-
+total_cards=0
 total_instances=preset_game_ids
-$input.each_with_index do |line,ind|
-    
-    
+
+$input.each_with_index do |line,ind|  
     game_array=Array.new
     game_id= line.split(": ")[0].split(" ")[1]
+    p game_id
 
     # p total_instances[game_id.to_i]
 
@@ -95,7 +95,8 @@ $input.each_with_index do |line,ind|
     end
 end
 
-total_instances.each {|x| total+=x}
+total_instances.each {|x| total_cards+=x[1].to_i}
 
+p "Part 2: #{total_cards}"
 
-# p "Part 2: #{product}"
+#7185540
