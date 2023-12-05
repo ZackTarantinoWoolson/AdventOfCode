@@ -32,6 +32,8 @@ Of course, the actual engine schematic is much larger. What is the sum of all of
 
 ## Part 1
 
+Start: 10:20 AM ET 12/5
+
 End result: 
 Find all numbers that are adject (Above, below, and diagonal by 1 character) to a a symbol (.*$/+-=&#@%) - add them all together
 
