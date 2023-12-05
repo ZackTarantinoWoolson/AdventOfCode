@@ -1,11 +1,12 @@
 Dir.chdir(File.dirname(__FILE__))
-input=File.open("puzzleInput.txt").readlines.map(&:chomp)
-# input=File.open("teststrings.txt").readlines.map(&:chomp)
+# input=File.open("puzzleInput.txt").readlines.map(&:chomp)
+input=File.open("teststrings.txt").readlines.map(&:chomp)
 
 # correct: 526404
 # I got 507705
 
-$symbols = ["!","@","#","$","%","&","*","-","=","_","+","<",">","?","/"]
+$part1_symbols = ["!","@","#","$","%","&","*","-","=","_","+","<",">","?","/"]
+$part2_symbols = ["*"]
 
 # Reused from day 1
 def scan_string(string, regex)
@@ -24,11 +25,9 @@ def find_number_col(line)
     ind=0
     (0..line.length-1).each do |x|
         ch = line.chars[ind]
-        # p ind, ch
         unless ch.match(/[0-9]/).nil?
             num = is_next_char_num(line,ind)
             num_list << [num,ind+1] #increas index by 1 to make the it index1 instead of index0
-            # p num
             ind+=num.length
         else
             ind+=1
@@ -42,38 +41,30 @@ end
 
 def is_next_char_num(line,ind)
     number=line.chars[ind]
-    # p "number: #{number} | ind; #{ind} | line.length #{line.length}"
     while !line.chars[ind+1].match(/[0-9]/).nil?
         number += line.chars[ind+1]
         ind+=1
-        # p ind+number.length>line.length
         break if ind+number.length>line.length
     end
 
     return number
 end
 
-def find_symbol_col(line)
+def find_symbol_col(line, symbols)
     sym_list = Array.new
-    $symbols.each do |sym|
+    symbols.each do |sym|
         scan = scan_string(line,"[#{sym}]")
         scan.each { |s| sym_list<< s[1] } unless (scan.empty?)
     end
     sym_list.sort_by{|k,v| v}
 end
 
-### MIGHT HAVE TO REVISIT THIS- If a number is above 2 symbols, it counts twice right now.
 def find_neighbors(row,col,nums)
-    # p nums
-    # p "finding in #{row}"
     numbers_to_return=Array.new
     line_total=0
     nums[1].each do |n|
-        # p "NUmber: #{n[0]} | numbers index: #{n[1]} | Col: #{col}"
+        # p "Number: #{n[0]} | numbers index: #{n[1]} | Col: #{col}"
         if (([col-1,col,col+1].include?(n[1])) || ([col-1,col,col+1].include?(n[1]+n[0].length.to_i-1)))
-            # p "#{n[0]} is in"
-            # p n[0]
-            # numbers_to_return<<n[0].to_i
             line_total+=n[0].to_i
         end
     end
@@ -82,44 +73,68 @@ def find_neighbors(row,col,nums)
 end
 
 
+#### Part 1
+
 sym_table = Array.new
 num_table = Array.new
+all_numbers=Array.new
 
 input.each_with_index do |line,ind|
-    # p line
     sym_rc=Array.new # row and collumn of symbols
 
     sym_rc<<ind
-    sym_rc<<find_symbol_col(line)
+    sym_rc<<find_symbol_col(line,$part1_symbols)
     sym_table<<sym_rc unless sym_rc[1].empty?
 
-
     num_table<<[ind,find_number_col(line)]
-
-    # p num_table,sym_table
 end
-
-# p sym_table
-# p num_table,""
-
-all_numbers=Array.new
 
 sym_table.each do |s|
     row = s[0]
     cols= s[1]
-    # p row,cols
-    cols.each do |c|
-        # p "#{row} #{c}","before",all_numbers
-        all_numbers<<find_neighbors(row-1,c,num_table[row-1]) unless num_table[row-1].nil?
-        # p "above",all_numbers
-        all_numbers<<find_neighbors(row,c,num_table[row])
-        # p "inline",all_numbers
-        all_numbers<<find_neighbors(row+1,c,num_table[row+1]) unless num_table[row+1].nil?
-        # p "below",all_numbers
-    end
 
-    # p "","",all_numbers
+    cols.each do |c|
+        all_numbers<<find_neighbors(row-1,c,num_table[row-1]) unless num_table[row-1].nil?
+        all_numbers<<find_neighbors(row,c,num_table[row])
+        all_numbers<<find_neighbors(row+1,c,num_table[row+1]) unless num_table[row+1].nil?
+    end
 end
 
-# p all_numbers
 p "Part 1: #{all_numbers.sum}"
+
+
+#### Part 2
+
+sym_table.clear
+num_table.clear
+all_numbers.clear
+
+input.each_with_index do |line,ind|
+    sym_rc=Array.new # row and collumn of symbols
+
+    sym_rc<<ind
+    sym_rc<<find_symbol_col(line,$part2_symbols)
+    sym_table<<sym_rc unless sym_rc[1].empty?
+
+    num_table<<[ind,find_number_col(line)]
+end
+
+p sym_table,num_table
+
+sym_table.each do |s|
+    symbols_neighbors=Array.new
+    row = s[0]
+    cols= s[1]
+
+    cols.each do |c|
+        symbols_neighbors<<find_neighbors(row-1,c,num_table[row-1]) unless num_table[row-1].nil?
+        symbols_neighbors<<find_neighbors(row,c,num_table[row]) unless num_table[row].nil?
+        symbols_neighbors<<find_neighbors(row+1,c,num_table[row+1]) unless num_table[row+1].nil?
+    end
+
+    p symbols_neighbors.size,symbols_neighbors
+
+    symbols_neighbors.each {|x| all_numbers<<x } unless symbols_neighbors.size!=2
+end
+
+p "Part 2: #{all_numbers.sum}"
