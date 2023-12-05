@@ -11,8 +11,19 @@ def get_play_numbers(line)
     line.split(" | ")[1].split(" ")
 end
 
+def calculate_points(wins)
+    points=0
+    if wins>1
+        points+=1
+        (1..wins-1).each do |x|
+            points=points*2
+        end
+    elsif wins==1
+        points+=1
+    end
 
-
+    points
+end
 
 total_points=0
 
