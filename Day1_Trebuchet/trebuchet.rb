@@ -19,11 +19,23 @@ def scan_string(string, regex)
     result
 end
 
-def find_numbers(line)
+def find_numbers_part1(line)
     num_index = Array.new # ["num", index]
 
     # Part 1 : Just look for ints
     $num_nums.each do |num|
+        temp = scan_string(line,num)
+        temp.each { |t| num_index<< t } unless (temp.empty?)
+    end
+
+    num_index.sort_by{|k,v| v}
+end
+
+def find_numbers_part2(line)
+    num_index = Array.new # ["num", index]
+
+    # Part 2 : Strings and ints
+    $all_nums.each do |num|
         temp = scan_string(line,num)
         temp.each { |t| num_index<< t } unless (temp.empty?)
     end
@@ -45,7 +57,21 @@ end
 final_num = 0
 
 input.each do |line|
-    nums_in_line = find_numbers(line)
+    
+    nums_in_line = find_numbers_part1(line)
+
+    unless nums_in_line.empty?
+        sub_total = convert_strings(nums_in_line.first).to_s 
+        sub_total += convert_strings(nums_in_line.last).to_s
+        final_num += sub_total.to_i
+    end
+end
+
+p "Part 1: #{final_num}"
+final_num=0
+
+input.each do |line|
+    nums_in_line = find_numbers_part2(line)
 
     sub_total = convert_strings(nums_in_line.first).to_s
     sub_total += convert_strings(nums_in_line.last).to_s
@@ -53,4 +79,4 @@ input.each do |line|
     final_num += sub_total.to_i
 end
 
-p final_num
+p "Part 2: #{final_num}"
