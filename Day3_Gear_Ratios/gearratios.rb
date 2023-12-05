@@ -1,6 +1,6 @@
 Dir.chdir(File.dirname(__FILE__))
-# input=File.open("puzzleInput.txt").readlines.map(&:chomp)
-input=File.open("teststrings.txt").readlines.map(&:chomp)
+input=File.open("puzzleInput.txt").readlines.map(&:chomp)
+# input=File.open("teststrings.txt").readlines.map(&:chomp)
 
 $part1_symbols = ["!","@","#","$","%","&","*","-","=","_","+","<",">","?","/"]
 $part2_symbols = ["*"]
@@ -62,11 +62,12 @@ def find_neighbors(row,col,nums)
     nums[1].each do |n|
         # p "Number: #{n[0]} | numbers index: #{n[1]} | Col: #{col}"
         if (([col-1,col,col+1].include?(n[1])) || ([col-1,col,col+1].include?(n[1]+n[0].length.to_i-1)))
-            line_total+=n[0].to_i
+            # line_total+=n[0].to_i
+            numbers_to_return<<n[0].to_i
         end
     end
 
-    return line_total
+    return numbers_to_return
 end
 
 
@@ -87,14 +88,18 @@ input.each_with_index do |line,ind|
 end
 
 sym_table.each do |s|
+    symbols_neighbors=Array.new
     row = s[0]
     cols= s[1]
 
     cols.each do |c|
-        all_numbers<<find_neighbors(row-1,c,num_table[row-1]) unless num_table[row-1].nil?
-        all_numbers<<find_neighbors(row,c,num_table[row])
-        all_numbers<<find_neighbors(row+1,c,num_table[row+1]) unless num_table[row+1].nil?
+        find_neighbors(row-1,c,num_table[row-1]).each {|x| symbols_neighbors<<x} unless num_table[row-1].nil?
+        find_neighbors(row,c,num_table[row]).each {|x| symbols_neighbors<<x}
+        find_neighbors(row+1,c,num_table[row+1]).each {|x| symbols_neighbors<<x} unless num_table[row+1].nil?
+        symbols_neighbors.delete(0)
     end
+
+    symbols_neighbors.each {|x| all_numbers<<x}
 end
 
 p "Part 1: #{all_numbers.sum}"
@@ -116,19 +121,22 @@ input.each_with_index do |line,ind|
 end
 
 sym_table.each do |s|
-    symbols_neighbors=Array.new
     row = s[0]
     cols= s[1]
 
     cols.each do |c|
-        symbols_neighbors<<find_neighbors(row-1,c,num_table[row-1]) unless num_table[row-1].nil?
-        symbols_neighbors<<find_neighbors(row,c,num_table[row]) unless num_table[row].nil?
-        symbols_neighbors<<find_neighbors(row+1,c,num_table[row+1]) unless num_table[row+1].nil?
+        symbols_neighbors=Array.new
+
+        find_neighbors(row-1,c,num_table[row-1]).each {|x| symbols_neighbors<<x} unless num_table[row-1].nil?
+        find_neighbors(row,c,num_table[row]).each {|x| symbols_neighbors<<x} unless num_table[row].nil?
+        find_neighbors(row+1,c,num_table[row+1]).each {|x| symbols_neighbors<<x} unless num_table[row+1].nil?
         symbols_neighbors.delete(0) # remove any zeros
+
+        unless symbols_neighbors.size!=2
+            all_numbers << symbols_neighbors[0]*symbols_neighbors[1]
+        end
     end
-    unless symbols_neighbors.size!=2
-        all_numbers << symbols_neighbors[0]*symbols_neighbors[1]
-    end
+    
 end
 
 p "Part 2: #{all_numbers.sum}"

@@ -60,6 +60,7 @@ What is the sum of all of the gear ratios in your engine schematic?
 ## Part 1
 
 Start: 10:20 AM ET 12/5
+Finished 3:45 PM ET 12/5
 
 End result: 
 Find all numbers that are adject (Above, below, and diagonal by 1 character) to a a symbol (.*$/+-=&#@%) - add them all together
@@ -69,9 +70,10 @@ Tasks:
 - For each symbols, looks at the adjacet spaces and count the numbers
 - Add those numbers to an array and sum it at the end.
 
-Finished 3:45 PM ET 12/5
-
 ## Part 2
+
+Start: 3:50 PM ET 12/5
+Finished 4:30 PM ET 12/5
 
 Result needed: 
 Find all pairs (exactly 2) of numbers that are adjact to a * . Then,multiply those two numbers. That is the gear ratio. Then, add up all the gear rations.
