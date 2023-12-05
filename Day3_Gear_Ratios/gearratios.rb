@@ -5,7 +5,7 @@ input=File.open("puzzleInput.txt").readlines.map(&:chomp)
 # correct: 526404
 # I got 507705
 
-$symbols = ["!","@","#","$","%","&","*","-","=","_","+","<",">","?"]
+$symbols = ["!","@","#","$","%","&","*","-","=","_","+","<",">","?","/"]
 
 # Reused from day 1
 def scan_string(string, regex)
@@ -66,12 +66,14 @@ end
 def find_neighbors(row,col,nums)
     # p nums
     # p "finding in #{row}"
+    numbers_to_return=Array.new
     line_total=0
     nums[1].each do |n|
         # p "NUmber: #{n[0]} | numbers index: #{n[1]} | Col: #{col}"
         if (([col-1,col,col+1].include?(n[1])) || ([col-1,col,col+1].include?(n[1]+n[0].length.to_i-1)))
             # p "#{n[0]} is in"
-            p n[0]
+            # p n[0]
+            # numbers_to_return<<n[0].to_i
             line_total+=n[0].to_i
         end
     end
@@ -93,6 +95,8 @@ input.each_with_index do |line,ind|
 
 
     num_table<<[ind,find_number_col(line)]
+
+    # p num_table,sym_table
 end
 
 # p sym_table
@@ -105,10 +109,16 @@ sym_table.each do |s|
     cols= s[1]
     # p row,cols
     cols.each do |c|
+        # p "#{row} #{c}","before",all_numbers
         all_numbers<<find_neighbors(row-1,c,num_table[row-1]) unless num_table[row-1].nil?
+        # p "above",all_numbers
         all_numbers<<find_neighbors(row,c,num_table[row])
+        # p "inline",all_numbers
         all_numbers<<find_neighbors(row+1,c,num_table[row+1]) unless num_table[row+1].nil?
+        # p "below",all_numbers
     end
+
+    # p "","",all_numbers
 end
 
 # p all_numbers
