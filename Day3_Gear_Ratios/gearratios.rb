@@ -130,11 +130,13 @@ sym_table.each do |s|
         symbols_neighbors<<find_neighbors(row-1,c,num_table[row-1]) unless num_table[row-1].nil?
         symbols_neighbors<<find_neighbors(row,c,num_table[row]) unless num_table[row].nil?
         symbols_neighbors<<find_neighbors(row+1,c,num_table[row+1]) unless num_table[row+1].nil?
+        symbols_neighbors.delete(0) # remove any zeros
     end
 
-    p symbols_neighbors.size,symbols_neighbors
-
-    symbols_neighbors.each {|x| all_numbers<<x } unless symbols_neighbors.size!=2
+    # p symbols_neighbors
+    unless symbols_neighbors.size!=2
+        all_numbers << symbols_neighbors[0]*symbols_neighbors[1]
+    end
 end
 
 p "Part 2: #{all_numbers.sum}"
