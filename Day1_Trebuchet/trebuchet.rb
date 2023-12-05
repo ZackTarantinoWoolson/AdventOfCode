@@ -22,9 +22,19 @@ def find_numbers(line)
     num_index.sort_by{|k,v| v}
 end
 
+def convert_strings(val)
+    $num_strings.each_with_index do |ele,index|
+        p index
+    end
+end
+
 test_strings.each do |line|
     p line
     nums_in_line = find_numbers(line)
 
-    p "first #{nums_in_line.first} | last: #{nums_in_line.last}"
+    nums_in_line.each do |num|
+        convert_strings(num)
+    end
+
+    # p "first #{nums_in_line.first} | last: #{nums_in_line.last}"
 end

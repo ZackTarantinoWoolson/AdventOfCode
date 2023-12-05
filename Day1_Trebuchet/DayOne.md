@@ -24,5 +24,6 @@ Consider your entire calibration document. What is the sum of all of the calibra
 ## Notes: 
 
 Task 1 : Find all numbers per line and in the order they are set
-Task 2 : Combine the first and last numbers on each line to form one number
-Task 3 : Add All numbers together to get the sum of all values
+Task 2 : Convert string ("one") to number ("1")
+Task 3 : Combine the first and last numbers on each line to form one number
+Task 4 : Add All numbers together to get the sum of all values
