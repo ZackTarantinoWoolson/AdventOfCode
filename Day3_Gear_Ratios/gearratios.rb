@@ -39,9 +39,12 @@ end
 
 def is_next_char_num(line,ind)
     number=line.chars[ind]
+    # p "number: #{number} | ind; #{ind} | line.length #{line.length}"
     while !line.chars[ind+1].match(/[0-9]/).nil?
         number += line.chars[ind+1]
         ind+=1
+        # p ind+number.length>line.length
+        break if ind+number.length>line.length
     end
 
     return number
@@ -77,7 +80,7 @@ sym_table = Array.new
 num_table = Array.new
 
 input.each_with_index do |line,ind|
-    p line
+    # p line
     sym_rc=Array.new # row and collumn of symbols
 
     sym_rc<<ind
@@ -88,8 +91,8 @@ input.each_with_index do |line,ind|
     num_table<<[ind,find_number_col(line)]
 end
 
-p sym_table
-p num_table,""
+# p sym_table
+# p num_table,""
 
 all_numbers=Array.new
 
@@ -104,4 +107,4 @@ sym_table.each do |s|
     end
 end
 
-p all_numbers,all_numbers.sum
+p "Part 1: #{all_numbers.sum}"
