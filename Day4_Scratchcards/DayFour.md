@@ -40,10 +40,12 @@ Start: 5:30 PM ET 12/5
 Finished 
 
 End result: 
-
+Point total for all cards. Count the points of each card and then sum it all in the end
 
 Tasks:
-- 
+- Split each card up and do math for each row
+- Write formulat for doubling points
+- Sum all points together
 
 ## Part 2
 
