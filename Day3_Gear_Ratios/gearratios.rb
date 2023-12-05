@@ -132,8 +132,6 @@ sym_table.each do |s|
         symbols_neighbors<<find_neighbors(row+1,c,num_table[row+1]) unless num_table[row+1].nil?
         symbols_neighbors.delete(0) # remove any zeros
     end
-
-    # p symbols_neighbors
     unless symbols_neighbors.size!=2
         all_numbers << symbols_neighbors[0]*symbols_neighbors[1]
     end
