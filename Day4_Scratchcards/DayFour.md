@@ -37,7 +37,7 @@ Take a seat in the large pile of colorful cards. How many points are they worth 
 ## Part 1
 
 Start: 5:30 PM ET 12/5
-Finished 
+Finished 5:43 PM ET 12/5
 
 End result: 
 Point total for all cards. Count the points of each card and then sum it all in the end
