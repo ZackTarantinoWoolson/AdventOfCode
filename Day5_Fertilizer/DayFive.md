@@ -104,7 +104,7 @@ If there is no mapped source number == destination number
 ## Part 1
 
 Start: 6:36 PM ET 12/5
-Finished 
+Finished 7:27 PM ET 12/5
 
 End result: 
 closest location that needs a seed. Find the lowest locuation number that corresponds to any of the inital seeds.

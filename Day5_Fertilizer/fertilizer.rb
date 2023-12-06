@@ -1,6 +1,6 @@
 Dir.chdir(File.dirname(__FILE__))
-# $input=File.open("puzzleInput.txt").readlines.map(&:chomp)
-$input=File.open("teststrings.txt").readlines.map(&:chomp)
+$input=File.open("puzzleInput.txt").readlines.map(&:chomp)
+# $input=File.open("teststrings.txt").readlines.map(&:chomp)
 
 def build_maps(x)
     mapped_numbers=Array.new
@@ -29,8 +29,6 @@ end
 initial_seeds=Array.new
 $input[0].split(": ")[1].split(" ").each {|x| initial_seeds<<x.to_i}
 
-# p $input[1].empty?
-
 seed_to_soil_map=Array.new
 soil_to_fertilizer_map=Array.new
 fertilizer_to_water_map=Array.new
@@ -38,12 +36,11 @@ water_to_light_map=Array.new
 light_to_temperature_map=Array.new
 temperature_to_humidity_map=Array.new
 humidity_to_location_map=Array.new
+all_locations = Array.new
 
 $input.each_with_index do |row,x|
-    # p x,row
     next if row.empty? || !row.scan("seeds:").empty?
     if !row.scan("map").empty?
-        # p "in if"
         case row.split(" ")[0]
         when "seed-to-soil"
             seed_to_soil_map=build_maps(x+1)
@@ -62,17 +59,6 @@ $input.each_with_index do |row,x|
         end
     end
 end
-
-
-# p seed_to_soil_map
-# p soil_to_fertilizer_map
-# p fertilizer_to_water_map
-# p water_to_light_map
-# p light_to_temperature_map
-# p temperature_to_humidity_map
-# p humidity_to_location_map
-
-all_locations = Array.new
 
 initial_seeds.each do |seed|
     soil=source_to_destination(seed_to_soil_map, seed)
