@@ -1,6 +1,6 @@
 Dir.chdir(File.dirname(__FILE__))
-# $input=File.open("puzzleInput.txt").readlines.map(&:chomp)
-$input=File.open("teststrings.txt").readlines.map(&:chomp)
+$input=File.open("puzzleInput.txt").readlines.map(&:chomp)
+# $input=File.open("teststrings.txt").readlines.map(&:chomp)
 
 def build_maps(x)
     mapped_numbers=Array.new
@@ -84,6 +84,7 @@ new_seeds=Array.new
 end
 
 new_seeds.each do |seed|
+    p seed
     soil=source_to_destination(seed_to_soil_map, seed)
     fertilizer=source_to_destination(soil_to_fertilizer_map,soil)
     water=source_to_destination(fertilizer_to_water_map,fertilizer)
