@@ -8,8 +8,6 @@ def build_maps(x)
     (x..$input.length).each do |r|
         temp=Array.new
         break if $input[r].nil? || !$input[r].scan("map").empty? || $input[r].empty?
-        # break if !$input[r].scan("map").empty?
-        # p $input[r],!$input[r].scan("map").empty?
         
         $input[r].split(" ").each {|x| temp<<x.to_i}
         mapped_numbers<<temp
